@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mancala Oyunu</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="game-detail">
+            <h1>MANCALA</h1>
+            <!-- <p id="playerDisplay">Sıra: Recep</p> -->
+            <div class="game-controls">
+                <button id="infoButton" title="Oyun Kuralları">
+                    <i class="ph ph-info"></i>
+                </button>
+
+                <button id="undoButton" title="Son hamleyi geri al">
+                    <i class="ph ph-arrow-arc-left"></i>
+                </button>
+
+                <button id="restartButton" title="Oyunu yeniden başlat">
+                    <i class="ph ph-arrow-counter-clockwise"></i>
+                </button>
+
+                <button id="muteButton" title="Sesi Aç/Kapat">
+                    <i id="muteIcon" class="ph ph-speaker-x"></i>
+                </button>
+            </div>
+        </div>
+        <div class="board">
+            <div id="pits">
+                <div class="top-user">
+                    <div id="p0" class="pit pit-ai">4</div>
+                    <div id="p1" class="pit pit-ai">4</div>
+                    <div id="p2" class="pit pit-ai">4</div>
+                    <div id="p3" class="pit pit-ai">4</div>
+                    <div id="p4" class="pit pit-ai">4</div>
+                    <div id="p5" class="pit pit-ai">4</div>
+                </div>
+                <div id="p6" class="score-container pit score">
+                    0
+                    <img src="/assets/images/berrak.webp" alt="">
+                </div>
+                <div class="bottom-user">
+                    <div id="p7" class="pit pit-user">4</div>
+                    <div id="p8" class="pit pit-user">4</div>
+                    <div id="p9" class="pit pit-user">4</div>
+                    <div id="p10" class="pit pit-user">4</div>
+                    <div id="p11" class="pit pit-user">4</div>
+                    <div id="p12" class="pit pit-user">4</div>
+                </div>
+                <div id="p13" class="score-container pit score">
+                    0
+                </div>
+            </div>
+        </div>
+        <span class="description">Bu oyun yeğenlerim mancala oynamayı sevdikleri için kendi aralarında dümenden oynasınlar diye yapılmıştır.</span>
+    </div>
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Oyun Kuralları</h2>
+            <ul>
+                <li><strong>Oyun Amacı:</strong> Oyunun amacı, rakibinizden daha fazla taş toplamaktır. Oyunun sonunda en fazla taşı toplayan oyuncu kazanır.</li>
+                <li><strong>Oyunun Başlangıcı:</strong> Oyun iki oyuncu arasında oynanır ve her oyuncunun 6 pit ve bir "Ev" adı verilen özel bölgesi vardır. Her bir pit, başlangıçta 4 taş ile doldurulur.</li>
+                <li><strong>Oyun Sırası:</strong> Oyuncular sırayla taşlarını dağıtır. Bir oyuncu, kendi tarafındaki pitslerden birini seçer ve taşları saat yönünde dağıtır.</li>
+                <li><strong>Taş Dağıtma:</strong> Bir pit seçildiğinde, o pitteki taş sayısı kadar taş saat yönünde sırasıyla diğer pitslere dağılır. Dağıtma işlemi, oyuncunun kendi tarafındaki pitslerden başlayıp, rakip tarafındaki pitsleri atlayarak yapılır.</li>
+                <li><strong>Ev Alanı:</strong> Her oyuncunun bir "Ev" alanı vardır ve bu alan oyuncunun sadece kendisine ait olan taşları toplamasına olanak sağlar. Eğer oyuncu taşlarını kendi Ev'ine koyarsa, bir tur daha kazanır ve oyunun sırası devam eder.</li>
+                <li><strong>Boş Pit:</strong> Eğer bir oyuncu boş bir pitten taş dağıtıyorsa, bu pitteki taşlar rakip oyuncuya hediye edilir ve tur sona erer.</li>
+                <li><strong>Oyunun Sonlanması:</strong> Oyunun sonunda, eğer bir oyuncunun tarafındaki bütün pitslerde taş kalmazsa oyun sona erer. Diğer oyuncu kalan taşlarını toplar ve oyun sona erer. Kazanan, en fazla taş toplayan oyuncu olur.</li>
+                <li><strong>Ekstra Tur:</strong> Eğer bir oyuncu kendi Ev'ine taş bırakırsa, bir ek tur hakkı kazanır. Bu turda da taşları dağıtma işlemi yapılır.</li>
+                <li><strong>Son Taş:</strong> Eğer oyuncu son taşını kendi Ev'ine koyarsa, oyuncu bir ek tur kazanır. Ancak, eğer son taşını rakip Ev'ine koyarsa, bu oyuncu ek bir hamle yapamaz.</li>
+                <li><strong>Oyunun Bitmesi:</strong> Oyunun sonunda, tüm taşlar toplanır ve en fazla taşı toplayan oyuncu kazanır.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>
